@@ -36,9 +36,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     var arrayOfMins = [Int]()
     var arrayOfIndex = [Int]()
-    
-    var minusFifty: Bool!
-    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,23 +99,33 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         for i in 0...arrayOfMins.count {
             
-            if sum <= 50 && i == arrayOfMins.count {
-                minusFifty = true
-                let alert = UIAlertController(title: "Results", message: "Yes \n \(sum) \n \(arrayOfIndex)", preferredStyle: UIAlertControllerStyle.alert)
+            if rowOneArray.count < 5 {
+                let alert = UIAlertController(title: "Error", message: "Row 1 has to contain at least 5 columns (numbers).", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title:"Ok", style: .cancel, handler: { (action: UIAlertAction!) in
                     self.arrayOfMins.removeAll()
                     self.arrayOfIndex.removeAll()
                 }))
                 self.present(alert, animated: true, completion: nil)
                 
-            } else if sum > 50 && i < arrayOfMins.count {
-                minusFifty = false
-                let alert = UIAlertController(title: "Results", message: "No \n \(sum) \n \(arrayOfIndex)", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title:"Ok", style: .cancel, handler: { (action: UIAlertAction!) in
-                    self.arrayOfMins.removeAll()
-                    self.arrayOfIndex.removeAll()
-                }))
-                self.present(alert, animated: true, completion: nil)
+            } else {
+                
+                if sum <= 50 && i == arrayOfMins.count {
+                    let alert = UIAlertController(title: "Results", message: "Yes \n \(sum) \n \(arrayOfIndex)", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title:"Ok", style: .cancel, handler: { (action: UIAlertAction!) in
+                        self.arrayOfMins.removeAll()
+                        self.arrayOfIndex.removeAll()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                } else if sum > 50 && i < arrayOfMins.count {
+                    let alert = UIAlertController(title: "Results", message: "No \n \(sum) \n \(arrayOfIndex)", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title:"Ok", style: .cancel, handler: { (action: UIAlertAction!) in
+                        self.arrayOfMins.removeAll()
+                        self.arrayOfIndex.removeAll()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
             }
         }
     }
