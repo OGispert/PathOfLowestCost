@@ -148,10 +148,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func getResults (myArray: Array<Int>) -> (Array<Any>,Array<Any>) {
         
         if myArray != [] {
-            let index = myArray.index(of: myArray.min()!)
-            arrayOfIndex.append(index!+1)
-            arrayOfMins.append(myArray.min()!)
-            return (arrayOfIndex, arrayOfMins)
+            if let ind = myArray.index(of: myArray.min()!) {
+                arrayOfIndex.append(ind+1)
+                arrayOfMins.append(myArray.min()!)
+                return (arrayOfIndex, arrayOfMins)
+            }
+            
         }
         
         return ([],[])
